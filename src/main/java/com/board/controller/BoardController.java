@@ -90,7 +90,6 @@ public class BoardController extends UiUtils {
 				return showMessageWithRedirect("게시글 삭제에 실패하였습니다.", "/board/list.do", Method.GET, null, model);
 			}
 		} catch (DataAccessException e) {
-			// TODO => DB 처리 과정에 문제가 발생하였다는 메세지를 전달.
 			return showMessageWithRedirect("데이터베이스 처리 과정에 문제가 발생하였습니다.", "/board/list.do", Method.GET, null, model);
 		} catch (Exception e) {
 			return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/board/list.do", Method.GET, null, model);
