@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,6 +21,7 @@ import com.zaxxer.hikari.HikariDataSource;
 /* Configuration = 자바기반의 설정파일로 인식 */
 /* PropoertySource = 해당 위치에서 참조할 properties파일의 위치 설정 */
 @Configuration
+@EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
 public class DBConfiguration {
 
@@ -27,6 +31,11 @@ public class DBConfiguration {
 	 */
 	@Autowired
 	private ApplicationContext applicationContext;
+	
+	@Bean
+	public PlatformTransactionManager transactionManager() throws Exception {
+		return new DataSourceTransactionManager(dataSource());
+	}
 
 	/*
 	 * prefix에 해당하는 모든 설정을 불러들여 매핑(바인딩)함. 
