@@ -57,6 +57,12 @@ public class DBConfiguration {
 	public SqlSessionFactory sqlSessionFactory() throws Exception {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
+		/* getResources method의 argument로 지정된 패턴이 포함되는 XML Mapper를 인식하도록 하는 역할 */
+		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
+		/* argument로 지정된 패턴을 이용해 풀 패키지 경로를 생략 할 수 있음. */
+		factoryBean.setTypeAliasesPackage("com.board.domain");
+		/* 밑에 mybatisConfig설정과 관련된 Bean을 설정파일로 지정 */
+		factoryBean.setConfiguration(mybatisConfg());
 		return factoryBean.getObject();
 	}
 
@@ -68,5 +74,15 @@ public class DBConfiguration {
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
-
+	
+	/* 
+	 * application.properties에서 
+	 * mybatis.configuration으로 시작하는 모든 설정을 읽어 Bean으로 등록 
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "mybatis.configuration")
+	public org.apache.ibatis.session.Configuration mybatisConfg() {
+		return new org.apache.ibatis.session.Configuration();
+	}
+	
 }
