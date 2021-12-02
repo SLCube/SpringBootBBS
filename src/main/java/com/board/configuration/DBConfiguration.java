@@ -69,7 +69,7 @@ public class DBConfiguration {
 		/* getResources method의 argument로 지정된 패턴이 포함되는 XML Mapper를 인식하도록 하는 역할 */
 		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));
 		/* argument로 지정된 패턴을 이용해 풀 패키지 경로를 생략 할 수 있음. */
-		factoryBean.setTypeAliasesPackage("com.board.domain");
+		factoryBean.setTypeAliasesPackage("com.board.*");
 		/* 밑에 mybatisConfig설정과 관련된 Bean을 설정파일로 지정 */
 		factoryBean.setConfiguration(mybatisConfg());
 		return factoryBean.getObject();

@@ -75,7 +75,7 @@ public class ServiceTests {
 
 	@Test
 	public void testOfGetBoardList() {
-		List<BoardDTO> boardList = boardService.getBoardList();
+		List<BoardDTO> boardList = boardService.getBoardList(null);
 		
 		if(boardList.isEmpty() == false) {
 			for (BoardDTO board : boardList) {

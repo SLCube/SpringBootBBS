@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="board/layout/basic">
 <th:block layout:fragment="title">
-	<title>This page is list page</title>
+	<title>This page is a list page</title>
 </th:block>
 
 <th:block layout:fragment="search">
-	<form action="#" id="searchform-header" class="searchform js__toggle actice pull-right">
-		<input type="search" placeholder="Search..." class="input-search" />
+	<form action="#" id="searchform-header" class="searchform js__toggle active pull-right">
+		<input type="search" placeholder="Search..." class="input-search">
 		<button class="mdi mdi-magnify button-search" type="submit">
 			<i class="fa fa-search" aria-hidden="true"></i>
 		</button>
@@ -40,41 +40,26 @@
 				</tr>
 			</tbody>
 		</table>
+
 		<div class="btn_wrap text-right">
 			<a th:href="@{/board/write.do}" class="btn btn-primary waves-effect waves-light">Write</a>
 		</div>
 
 		<th:block layout:fragment="paging">
-			<nav aria-label="Page navigation" class="text-center">
-				<ul class="pagination">
-					<li>
-						<a href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">1</a>
-					</li>
-					<li>
-						<a href="#">2</a>
-					</li>
-					<li>
-						<a href="#">3</a>
-					</li>
-					<li>
-						<a href="#">4</a>
-					</li>
-					<li>
-						<a href="#">5</a>
-					</li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
+			<nav th:replace="board/fragments/common :: pagination"></nav>
 		</th:block>
 	</div>
+</th:block>
+
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		function movePage(uri, queryString) {
+			location.href = uri + queryString;
+		}
+
+		/*]]>*/
+	</script>
 </th:block>
 </html>

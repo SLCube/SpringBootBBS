@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.domain.BoardDTO;
 import com.board.mapper.BoardMapper;
+import com.board.paging.PaginationInfo;
 
 @Service
 @Transactional
@@ -50,14 +51,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList(BoardDTO params) {
 		List<BoardDTO> boardList = Collections.emptyList();
-		int boardTotalCount = boardMapper.selectBoardTotalCount();
-		
-		if(boardTotalCount > 0) {
-			boardList = boardMapper.selectBoardList();
+
+		int boardTotalCount = boardMapper.selectBoardTotalCount(params);
+
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
+
+		params.setPaginationInfo(paginationInfo);
+
+		if (boardTotalCount > 0) {
+			boardList = boardMapper.selectBoardList(params);
 		}
-		
+
 		return boardList;
 	}
 
