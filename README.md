@@ -16,3 +16,7 @@
 6. eclipse에서 HTML, JSP파일 자동정렬시 가동성을 조금 더 높이는 방법 : https://12teamtoday.tistory.com/50
 
 7. REST API 설계 규칙 참고 사이트 : https://congsong.tistory.com/30?category=749196
+
+8. Gson 라이브러리 추가 '기본 틀'과 다른점 참고 사이트 : https://congsong.tistory.com/30?category=749196 의 댓글
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
