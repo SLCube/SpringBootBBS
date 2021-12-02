@@ -14,3 +14,5 @@
 5. Github에서 프로젝트 import할때 주의 할점 Gradle project Import : https://kku-jun.tistory.com/12
 
 6. eclipse에서 HTML, JSP파일 자동정렬시 가동성을 조금 더 높이는 방법 : https://12teamtoday.tistory.com/50
+
+7. REST API 설계 규칙 참고 사이트 : https://congsong.tistory.com/30?category=749196
