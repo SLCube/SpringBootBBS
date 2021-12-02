@@ -17,6 +17,7 @@
 
 7. REST API 설계 규칙 참고 사이트 : https://congsong.tistory.com/30?category=749196
 
-8. Gson 라이브러리 추가 '기본 틀'과 다른점 참고 사이트 : https://congsong.tistory.com/30?category=749196 의 댓글
-
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+8. Gson 라이브러리 추가 '기본 틀'과 다른점 참고 사이트 : https://congsong.tistory.com/30?category=749196 의 댓글 (버전은 변경 가능)
+    ```
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7' 
+    ```
