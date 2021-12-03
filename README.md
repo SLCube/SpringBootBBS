@@ -8,8 +8,6 @@
 
 1. Spring DI/IoC 이해 참고 사이트 : https://kingofbackend.tistory.com/41
 
-1.
-
 1. eclipse에서 HTML, JSP파일 자동정렬시 가동성을 조금 더 높이는 방법 : https://12teamtoday.tistory.com/50
 
 1. Gradle project Import 할때 주의 할점 : https://kku-jun.tistory.com/12
@@ -55,7 +53,7 @@
 
 ```
     /* CommentController.java에 getCommentList method를 다음과 같이 변경 */
-    
+
     @GetMapping(value = "/comments/{boardIdx}")
 	public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx,
 			@ModelAttribute("params") CommentDTO params) {
