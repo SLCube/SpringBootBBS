@@ -24,7 +24,7 @@ public class LoggerAspect {
 
 		} else if (name.contains("Service") == true) {
 			type = "ServiceImpl ===> ";
-
+			
 		} else if (name.contains("Mapper") == true) {
 			type = "Mapper ===> ";
 		}
