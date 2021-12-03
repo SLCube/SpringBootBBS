@@ -30,7 +30,7 @@
 
 1. 댓글 입력 구현 중 Could not read JSON: Unable to make field private final java.time.LocalDate java.time.LocalDateTime.date accessible 해결 방법 : https://congsong.tistory.com/32?category=749196 의 댓글(월드 러브님)
 
-```
+``` java
     /* GsonLocalDateTimeAdapter.java에 @Configuration추가 및 Gson을 Bean으로 등록 */
 
     @Configuration
@@ -38,20 +38,20 @@
 
         @Bean
         public Gson gson() {
-            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new      GsonLocalDateTimeAdapter()).create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
             return gson;
         }
     }
 ```
 
-```
+``` java
     /* 이후 CommentController.java에 Gson을 주입 */
 
     @Autowired
 	private Gson gson;
 ```
 
-```
+``` java
     /* CommentController.java에 getCommentList method를 다음과 같이 변경 */
 
     @GetMapping(value = "/comments/{boardIdx}")
