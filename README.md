@@ -29,3 +29,46 @@
 
 1. 댓글 리스트 구현 중 Advanced REST client 사용해보기 (본문 중 5번) 중 오류가 있을 시 
 본문 중 6번(JSON날짜 데이터 형태 지정하기) 까지 진행후 5번 실행하면 오류가 없습니다 : https://congsong.tistory.com/30?category=749196
+
+1. 댓글 입력 구현 중 Could not read JSON: Unable to make field private final java.time.LocalDate java.time.LocalDateTime.date accessible 해결 방법 : https://congsong.tistory.com/32?category=749196 의 댓글(월드 러브님)
+
+```
+    /* GsonLocalDateTimeAdapter.java에 @Configuration추가 및 Gson을 Bean으로 등록 */
+
+    @Configuration
+    public class GsonLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+
+        @Bean
+        public Gson gson() {
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new      GsonLocalDateTimeAdapter()).create();
+            return gson;
+        }
+    }
+```
+
+```
+    /* 이후 CommentController.java에 Gson을 주입 */
+
+    @Autowired
+	private Gson gson;
+```
+
+```
+    /* CommentController.java에 getCommentList method를 다음과 같이 변경 */
+    
+    @GetMapping(value = "/comments/{boardIdx}")
+	public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx,
+			@ModelAttribute("params") CommentDTO params) {
+
+		JsonObject jsonObj = new JsonObject();
+
+		List<CommentDTO> commentList = commentService.getCommentList(params);
+		if (CollectionUtils.isEmpty(commentList) == false) {
+            /* Gson을 주입했기 때문에 이곳에 Gson선언이 빠짐 */
+			JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
+			jsonObj.add("commentList", jsonArr);
+		}
+
+		return jsonObj;
+	}
+```
