@@ -71,7 +71,7 @@
         }
     ```
 
-1. 다중 파일 업로드/다운로드 구현 중 buid.gradle 중 compile group~의 내용을 implementation group~으로 교체
+1. 다중 파일 업로드/다운로드 구현 중 buid.gradle 중 compile group의 내용을 implementation group으로 교체
 
     ```
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
