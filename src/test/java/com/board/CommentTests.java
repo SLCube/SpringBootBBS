@@ -21,9 +21,9 @@ public class CommentTests {
 	public void testOfRegisterComment() {
 		int number = 20;
 
-		for (int i = 0; i < number; i++) {
+		for (int i = 1; i <= number; i++) {
 			CommentDTO params = new CommentDTO();
-			params.setBoardIdx((long) 60402);
+			params.setBoardIdx((long) 1790);
 			params.setContent(i + "번 댓글을 추가합니다.");
 			params.setWriter(i + "번 회원");
 			commentService.registerComment(params);

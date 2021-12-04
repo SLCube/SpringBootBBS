@@ -26,7 +26,7 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DBConfiguration {
 
 	/*
-	 * ApplicationContext = Spring Container중 하나 
+	 * ApplicationContext = Spring IoC Container중 하나 
 	 * Spring Container는 Bean의 생성과 사용, 관계, 생명 주기를 관리
 	 */
 	@Autowired
