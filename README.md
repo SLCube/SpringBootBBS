@@ -30,55 +30,43 @@
 
 1. 댓글 입력 구현 중 Could not read JSON: Unable to make field private final java.time.LocalDate java.time.LocalDateTime.date accessible 해결 방법 : https://congsong.tistory.com/32?category=749196 의 댓글(월드 러브님)
 
-    ``` java
-        /* GsonLocalDateTimeAdapter.java에 @Configuration추가 및 Gson을 Bean으로 등록 */
+``` java
+    /* GsonLocalDateTimeAdapter.java에 @Configuration추가 및 Gson을 Bean으로 등록 */
 
-        @Configuration
-        public class GsonLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+    @Configuration
+    public class GsonLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 
-            @Bean
-            public Gson gson() {
-                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
-                return gson;
-            }
+        @Bean
+        public Gson gson() {
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
+            return gson;
         }
-    ```
+    }
+```
 
-    ``` java
-        /* 이후 CommentController.java에 Gson을 주입 */
+``` java
+    /* 이후 CommentController.java에 Gson을 주입 */
 
-        @Autowired
-        private Gson gson;
-    ```
+    @Autowired
+	private Gson gson;
+```
 
-    ``` java
-        /* CommentController.java에 getCommentList method를 다음과 같이 변경 */
+``` java
+    /* CommentController.java에 getCommentList method를 다음과 같이 변경 */
 
-        @GetMapping(value = "/comments/{boardIdx}")
-        public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx,
-                @ModelAttribute("params") CommentDTO params) {
+    @GetMapping(value = "/comments/{boardIdx}")
+	public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx,
+			@ModelAttribute("params") CommentDTO params) {
 
-            JsonObject jsonObj = new JsonObject();
+		JsonObject jsonObj = new JsonObject();
 
-            List<CommentDTO> commentList = commentService.getCommentList(params);
-            if (CollectionUtils.isEmpty(commentList) == false) {
-                /* Gson을 주입했기 때문에 이곳에 Gson선언이 빠짐 */
-                JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
-                jsonObj.add("commentList", jsonArr);
-            }
+		List<CommentDTO> commentList = commentService.getCommentList(params);
+		if (CollectionUtils.isEmpty(commentList) == false) {
+            /* Gson을 주입했기 때문에 이곳에 Gson선언이 빠짐 */
+			JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
+			jsonObj.add("commentList", jsonArr);
+		}
 
-            return jsonObj;
-        }
-    ```
-
-1. 다중 파일 업로드/다운로드 구현 중 buid.gradle 중 compile group의 내용을 implementation group으로 교체
-
-    ```
-    compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3' 
-    ```
-
-    ```
-    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
-    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.3'
-    ```
+		return jsonObj;
+	}
+```
