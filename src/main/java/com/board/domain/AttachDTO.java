@@ -14,7 +14,7 @@ public class AttachDTO extends CommentDTO {
 	private Long boardIdx;
 	
 	/* 원본 파일명 */
-	private String orginalName;
+	private String originalName;
 	
 	/* 저장 파일명 */
 	private String saveName;

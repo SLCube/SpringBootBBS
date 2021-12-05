@@ -16,4 +16,6 @@ public interface AttachMapper {
 	
 	public int selectAttachTotal(Long boardIdx);
 	
+	public int undeleteAttach(List<Long> idxs);
+	
 }
