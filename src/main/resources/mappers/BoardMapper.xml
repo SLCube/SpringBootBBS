@@ -15,7 +15,7 @@
 		delete_time
 	</sql>
 	
-	<insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="insertBoard" parameterType="BoardDTO">
 		INSERT INTO tb_board (
 			<include refid="boardColumns" />
 		) VALUES (
