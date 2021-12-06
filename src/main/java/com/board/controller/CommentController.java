@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.board.domain.CommentDTO;
+import com.board.paging.Criteria;
 import com.board.service.CommentService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -52,11 +53,11 @@ public class CommentController {
 
 	@GetMapping(value = "/comments/{boardIdx}")
 	public JsonObject getCommentList(@PathVariable("boardIdx") Long boardIdx,
-			@ModelAttribute("params") CommentDTO params) {
+			@ModelAttribute("params") CommentDTO params, @ModelAttribute("criteria") Criteria criteria) {
 
 		JsonObject jsonObj = new JsonObject();
 
-		List<CommentDTO> commentList = commentService.getCommentList(params);
+		List<CommentDTO> commentList = commentService.getCommentList(params, criteria);
 		if (CollectionUtils.isEmpty(commentList) == false) {
 			JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
 			jsonObj.add("commentList", jsonArr);

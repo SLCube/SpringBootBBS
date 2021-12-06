@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.domain.CommentDTO;
 import com.board.mapper.CommentMapper;
+import com.board.paging.Criteria;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -39,12 +40,12 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<CommentDTO> getCommentList(CommentDTO params) {	
+	public List<CommentDTO> getCommentList(CommentDTO params, Criteria criteria) {	
 		List<CommentDTO> commentList = Collections.emptyList();
 		int totalCount = commentMapper.selectCommentToatlCount(params);
 		
 		if(totalCount > 0) {
-			commentList = commentMapper.selectCommentList(params);
+			commentList = commentMapper.selectCommentList(params, criteria);
 		}
 		
 		return commentList;

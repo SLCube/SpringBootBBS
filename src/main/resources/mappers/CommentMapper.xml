@@ -57,7 +57,7 @@
 			idx = #{idx}
 	</update>
 	
-	<select id="selectCommentList" resultType="CommentDTO" parameterType="CommentDTO">
+	<select id="selectCommentList" resultType="CommentDTO">
 		SELECT
 			<include refid="commentColumns" />
 		FROM
@@ -65,10 +65,12 @@
 		WHERE
 			delete_yn = 'N'
 		AND
-			board_idx = #{boardIdx}
+			board_idx = #{params.boardIdx}
 		ORDER BY
 			idx DESC, 
 			insert_time DESC
+		LIMIT
+			#{criteria.startPage}, #{criteria.recordsPerPage}
 	</select>
 	
 	<select id="selectCommentToatlCount" resultType="int" parameterType="CommentDTO">

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.board.domain.CommentDTO;
+import com.board.paging.Criteria;
 import com.board.service.CommentService;
 
 @SpringBootTest
@@ -41,9 +42,12 @@ public class CommentTests {
 	@Test
 	public void getCommentList() {
 		CommentDTO params = new CommentDTO();
+		Criteria criteria = new Criteria();
 		params.setBoardIdx((long) 60402);
 		
-		commentService.getCommentList(params);
+		commentService.getCommentList(params, criteria);
 	}
+	
+	
 
 }
