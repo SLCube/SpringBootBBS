@@ -31,11 +31,6 @@ public class DBConfiguration {
 	 */
 	@Autowired
 	private ApplicationContext applicationContext;
-	
-	@Bean
-	public PlatformTransactionManager transactionManager() throws Exception {
-		return new DataSourceTransactionManager(dataSource());
-	}
 
 	/*
 	 * prefix에 해당하는 모든 설정을 불러들여 매핑(바인딩)함. 
@@ -92,6 +87,11 @@ public class DBConfiguration {
 	@ConfigurationProperties(prefix = "mybatis.configuration")
 	public org.apache.ibatis.session.Configuration mybatisConfg() {
 		return new org.apache.ibatis.session.Configuration();
+	}
+	
+	@Bean
+	public PlatformTransactionManager transactionManager() throws Exception {
+		return new DataSourceTransactionManager(dataSource());
 	}
 	
 }

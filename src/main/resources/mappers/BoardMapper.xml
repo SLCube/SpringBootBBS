@@ -15,7 +15,7 @@
 		delete_time
 	</sql>
 	
-	<insert id="insertBoard" parameterType="BoardDTO" useGeneratedKeys="true" keyProperty="idx">
+	<insert id="insertBoard" parameterType="com.board.domain.BoardDTO" useGeneratedKeys="true" keyProperty="idx">
 		INSERT INTO tb_board (
 			<include refid="boardColumns" />
 		) VALUES (
@@ -33,7 +33,7 @@
 		)
 	</insert>
 	
-	<select id="selectBoardDetail" resultType="BoardDTO">
+	<select id="selectBoardDetail" resultType="com.board.domain.BoardDTO">
 		SELECT 
 			<include refid="boardColumns" />
 		FROM
@@ -44,7 +44,7 @@
 			idx = #{idx}
 	</select>
 	
-	<update id="updateBoard" parameterType="BoardDTO">
+	<update id="updateBoard" parameterType="com.board.domain.BoardDTO">
 		UPDATE tb_board
 		SET
 			update_time = NOW(),  
@@ -66,7 +66,7 @@
 			idx = #{idx}
 	</update>
 
-	<select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
+	<select id="selectBoardList" parameterType="com.board.domain.BoardDTO" resultType="com.board.domain.BoardDTO">
 		SELECT
 			<include refid="boardColumns" />
 		FROM
@@ -81,7 +81,7 @@
 		<include refid="CommonMapper.paging" />
 	</select>
 
-	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
+	<select id="selectBoardTotalCount" parameterType="com.board.domain.BoardDTO" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM

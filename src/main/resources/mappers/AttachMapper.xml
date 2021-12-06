@@ -31,7 +31,7 @@
 		</foreach>
 	</insert>
 
-	<select id="selectAttachDetail" parameterType="long" resultType="AttachDTO">
+	<select id="selectAttachDetail" parameterType="long" resultType="com.board.domain.AttachDTO">
 		SELECT
 			<include refid="attachColumns" />
 		FROM
@@ -51,7 +51,7 @@
 			board_idx = #{boardIdx}
 	</update>
 	
-	<select id="selectAttachList" parameterType="long" resultType="AttachDTO">
+	<select id="selectAttachList" parameterType="long" resultType="com.board.domain.AttachDTO">
 		SELECT
 			<include refid="attachColumns" />
 		FROM

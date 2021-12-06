@@ -12,7 +12,7 @@
 		delete_time
 	</sql>
 	
-	<insert id="insertComment" parameterType="CommentDTO">
+	<insert id="insertComment" parameterType="com.board.domain.CommentDTO">
 		INSERT INTO tb_comment(
 			<include refid="commentColumns" />
 		) VALUES(
@@ -27,7 +27,7 @@
 		)
 	</insert>
 	
-	<select id="selectCommentDetail" parameterType="long" resultType="CommentDTO">
+	<select id="selectCommentDetail" parameterType="long" resultType="com.board.domain.CommentDTO">
 		SELECT
 			<include refid="commentColumns" />
 		FROM
@@ -38,7 +38,7 @@
 			idx = #{idx}
 	</select>
 	
-	<update id="updateComment" parameterType="CommentDTO">
+	<update id="updateComment" parameterType="com.board.domain.CommentDTO">
 		UPDATE tb_comment
 		SET
 			update_time = NOW(), 
@@ -57,7 +57,7 @@
 			idx = #{idx}
 	</update>
 	
-	<select id="selectCommentList" resultType="CommentDTO">
+	<select id="selectCommentList" resultType="com.board.domain.CommentDTO">
 		SELECT
 			<include refid="commentColumns" />
 		FROM
@@ -73,7 +73,7 @@
 			#{criteria.startPage}, #{criteria.recordsPerPage}
 	</select>
 	
-	<select id="selectCommentToatlCount" resultType="int" parameterType="CommentDTO">
+	<select id="selectCommentToatlCount" resultType="int" parameterType="com.board.domain.CommentDTO">
 		SELECT
 			COUNT(*)
 		FROM

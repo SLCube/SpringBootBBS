@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
 <configuration debug="true">
 
 	<!-- Appenders -->
-	<appender name="console"
-		class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<Pattern>%d %5p [%c] %m%n</Pattern>
 		</encoder>
 	</appender>
 
-	<appender name="console-infolog"
-		class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<Pattern>%d %5p %m%n</Pattern>
 		</encoder>
@@ -18,10 +17,8 @@
 
 	<!-- Logger -->
 	<logger name="com.board" level="DEBUG" appender-ref="console" />
-	<logger name="jdbc.sqlonly" level="INFO"
-		appender-ref="console-infolog" />
-	<logger name="jdbc.resultsettable" level="INFO"
-		appender-ref="console-infolog" />
+	<logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
+	<logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
 
 	<!-- Root Logger -->
 	<root level="off">

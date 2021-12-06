@@ -1,6 +1,7 @@
 package com.board.aop;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
@@ -16,29 +17,34 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 @Configuration
 public class TransactionAspect {
-	private static final String AOP_TRANSACTION_METHOD_NAME = "*";
-	private static final String AOP_TRANSCTION_EXPRESSION = "execution(* board..service.*Impl.*(..))";
-	
+
 	@Autowired
 	private TransactionManager transactionManager;
-	
+
+	private static final String EXPRESSION = "execution(* com.board..service.*Impl.*(..))";
+
 	@Bean
 	public TransactionInterceptor transactionAdvice() {
-		MatchAlwaysTransactionAttributeSource source = new MatchAlwaysTransactionAttributeSource();
+
+		List<RollbackRuleAttribute> rollbackRules = Collections.singletonList(new RollbackRuleAttribute(Exception.class));
+
 		RuleBasedTransactionAttribute transactionAttribute = new RuleBasedTransactionAttribute();
-		transactionAttribute.setName(AOP_TRANSACTION_METHOD_NAME);
-		transactionAttribute.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(Exception.class)));
-		source.setTransactionAttribute(transactionAttribute);
-		
-		return new TransactionInterceptor(transactionManager, source);
+		transactionAttribute.setRollbackRules(rollbackRules);
+		transactionAttribute.setName("*");
+
+		MatchAlwaysTransactionAttributeSource attributeSource = new MatchAlwaysTransactionAttributeSource();
+		attributeSource.setTransactionAttribute(transactionAttribute);
+
+		return new TransactionInterceptor(transactionManager, attributeSource);
 	}
-	
+
 	@Bean
-	public Advisor transactionAdviceAdvisor() {
+	public Advisor transactionAdvisor() {
+
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-		pointcut.setExpression(AOP_TRANSCTION_EXPRESSION);
-		
+		pointcut.setExpression(EXPRESSION);
+
 		return new DefaultPointcutAdvisor(pointcut, transactionAdvice());
 	}
-	
+
 }
